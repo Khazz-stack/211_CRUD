@@ -36,7 +36,6 @@ app.listen(port, () => {
 })
 
 //post
-CREATE - tambah biodata (POST)
 app.post('/biodata', (req, res) => {
     const { nama, nim, kelas } = req.body;
     pool.query(
@@ -55,5 +54,4 @@ app.post('/biodata', (req, res) => {
         });
 });
 //put
-
 //delete
