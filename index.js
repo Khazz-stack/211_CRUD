@@ -35,9 +35,25 @@ app.listen(port, () => {
     console.log('App running on port ${port}.')
 })
 
-
 //post
-
+CREATE - tambah biodata (POST)
+app.post('/biodata', (req, res) => {
+    const { nama, nim, kelas } = req.body;
+    pool.query(
+        'INSERT INTO biodata (nama, nim, kelas) VALUES ($1, $2, $3) RETURNING *',
+        [nama, nim, kelas]
+    )
+        .then(result => {
+            res.status(201).json({
+                message: 'Data berhasil ditambahkan',
+                data: result.rows[0]
+            });
+        })
+        .catch(err => {
+            console.error('Error executing query:', err.stack);
+            res.status(500).json({ error: 'Database error' });
+        });
+});
 //put
 
 //delete
